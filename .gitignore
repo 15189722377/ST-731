@@ -41,6 +41,15 @@
 *.su
 *.idb
 *.pdb
+*.crf
+*.lx
+*.dep
+*.lnp
+*.htm
+*.axf
+*.lst
+*.iex
+
 
 # Kernel Module Compile Results
 *.mod*
