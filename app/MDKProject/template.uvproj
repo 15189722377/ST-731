@@ -44,11 +44,11 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\</OutputDirectory>
+          <OutputDirectory>.\Object\</OutputDirectory>
           <OutputName>template</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\</ListingPath>
@@ -76,9 +76,9 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>fromelf.exe --bin -o "$L@L.bin" "#L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -308,7 +308,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
+                <StartAddress>0x8003000</StartAddress>
                 <Size>0x10000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -426,6 +426,33 @@
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>AD5663.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\AD5663.C</FilePath>
+            </File>
+            <File>
+              <FileName>AD7792.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\AD7792.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADG1613.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\ADG1613.c</FilePath>
+            </File>
+            <File>
+              <FileName>LTC2630ISC6.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\LTC2630ISC6.C</FilePath>
+            </File>
+            <File>
+              <FileName>flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\flash.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Startup</GroupName>

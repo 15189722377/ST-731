@@ -5,6 +5,9 @@
 #include "stm32f10x.h"
 #include "regmap.h"
 
+#define HW_VERSION  "1.0"
+#define SW_VERSION  "1.0"
+
 #define MODBUS_PARITY_NONE 	0
 #define MODBUS_PARITY_ODD 	1
 #define MODBUS_PARITY_EVEN 	2
@@ -22,5 +25,10 @@ extern FILTER_SETTINGS_T filter_settings;
 extern MEASURE_VALUES_T measure_values;
 
 extern SENSOR_PARAM_T sensor_param;
+
+void System_Init(void);
+void Parameters_Reset(void);
+void LED_TurnOn(void);
+void LED_TurnOff(void);
 
 #endif

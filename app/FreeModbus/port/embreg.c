@@ -75,9 +75,9 @@ eMBErrorCode eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRe
 			break;
 			
 		//pH\ORP专有寄存器
-		case PHREG_FLAG:
+		case SENSOR_FLAG:
 			//判断地址和寄存器数目合法性
-			if(usAddress + usNRegs <= PHREG_SADDR + PHREG_NREGS)
+			if(usAddress + usNRegs <= SENSOR_SADDR + SENSOR_NREGS)
 			{
 				data_pointer= (void *)&sensor_param;
 			}
@@ -208,6 +208,18 @@ eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usN
 			if(usAddress + usNRegs <= MVREG_SADDR + MVREG_NREGS)
 			{
 				data_pointer= (void *)&measure_values;
+			}
+			else
+			{
+				eStatus=MB_ENOREG;			
+			}
+			break;
+			
+			//专有寄存器
+		case SENSOR_FLAG:              //48001
+			if(usAddress + usNRegs <= SENSOR_SADDR + SENSOR_NREGS)
+			{
+				data_pointer= (void *)&sensor_param;
 			}
 			else
 			{

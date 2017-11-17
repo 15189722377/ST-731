@@ -107,19 +107,21 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   USART_InitStructure.USART_BaudRate = ulBaudRate;            //只修改波特率
-  USART_InitStructure.USART_WordLength = USART_WordLength_9b;
   USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	if(eParity == MODBUS_PARITY_ODD)
 	{
 		USART_InitStructure.USART_Parity = USART_Parity_Odd;
+		USART_InitStructure.USART_WordLength = USART_WordLength_9b;
 	}
 	else if(eParity == MODBUS_PARITY_EVEN)
 	{
 		USART_InitStructure.USART_Parity = USART_Parity_Even;
+		USART_InitStructure.USART_WordLength = USART_WordLength_9b;
 	}
 	else 
 	{
 		USART_InitStructure.USART_Parity = USART_Parity_No;
+		USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	}
 
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
