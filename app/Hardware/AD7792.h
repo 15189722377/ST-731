@@ -19,6 +19,6 @@ typedef enum
 }PDChannal;
 
 void AD7792_Init(void);
-void AD_GetPD(PDChannal PD_Channal);
+u16 AD_GetPD(PDChannal PD_Channal);
 
 #endif

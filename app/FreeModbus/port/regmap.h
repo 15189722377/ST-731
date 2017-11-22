@@ -62,10 +62,11 @@ typedef	struct calibSettings
 //struct filterSettings is not used, reserved
 typedef	struct filterSettings
 {											        /* Register		Type  		 R/W */
-	uint16	filterType;					  /* 45001	 16bit integer   r/w */
-	float		filterCoefficient_1;  /* 45002	 32bit float     r/w */
-	float		filterCoefficient_2;  /* 45004	 32bit float     r/w */
-	uint16	reserved[4];				  /* 45006   reserved */
+//	uint16	filterType;					  /* 45001	 16bit integer   r/w */
+//	float		filterCoefficient_1;  /* 45002	 32bit float     r/w */
+//	float		filterCoefficient_2;  /* 45004	 32bit float     r/w */
+//	uint16	reserved[4];				  /* 45006   reserved */
+	uint16  ad7792[40];
 } FILTER_SETTINGS_T;
 
 typedef struct measureValues
@@ -88,31 +89,31 @@ typedef	struct sensorParam
   float     intercept;       /* 48004   32bit float     useless r/w */
   float     t1;              /* 48006   32bit float     r/w */
   float     t2;              /* 48008   32bit float     r/w */
-  uint16    mARange1;        /* 48009   32bit float     r/w */
-  uint16    mARange2;        /* 48010   16bit integer   r/w */
-  uint16    reserved2;     /* 48011   16bit integer   r/w */
-  uint16    ledDelayTime;    /* 48012   16bit integer   r/w */
-  uint16    cLED1;           /* 48013   16bit integer   r/w */
-  uint16    cLED2;           /* 48014   16bit integer   r/w */ 
-  uint16    VGA1;
-  uint16    VGA2;
-  uint16    DAC2;	
-  uint16    PD1di;           /* 48015   16bit integer   r/w */
-  uint16    PD2di;           /* 48016   16bit integer   r/w */
-  uint16    PD3di;           /* 48017   16bit integer   r/w */
-  uint16    pdEnddi;         /* 48018   16bit integer   r/w */
-  uint16    PD1;             /* 48019   16bit integer   r/w */
-  uint16    PD2;             /* 48021   16bit integer   r/w */
-  uint16    PD3;             /* 48022   16bit integer   r/w */
-  uint16    pdEnd;           /* 48023   16bit integer   r/w */
-  uint16    ctLED1Factory;   /* 48024   16bit integer   r/w */
-  uint16    ctLED2Factory;   /* 48025   16bit integer   r/w */
-  uint16    PD1diFactory;    /* 48026   16bit integer   r/w */
-  uint16    PD2diFactory;    /* 48027   16bit integer   r/w */
-  uint16    PD3diFactory;    /* 48028   16bit integer   r/w */
-  uint16    pdEnddiFactory;  /* 48029   16bit integer   r/w */ 
-  uint16    errorCode;	     /* 48030   16bit integer   useless r/w */
-  uint16    reserved[4];     /* 48031 reserved */
+  uint16    mARange1;        /* 48010   32bit float     r/w */
+  uint16    mARange2;        /* 48011   16bit integer   r/w */
+  uint16    dark;            /* 48012   16bit integer   r/w */
+  uint16    ledDelayTime;    /* 48013   16bit integer   r/w */
+  uint16    cLED1;           /* 48014   16bit integer   r/w */
+  uint16    cLED2;           /* 48015   16bit integer   r/w */ 
+  uint16    VGA1;						 /* 48016 */
+  uint16    VGA2;            /* 48017 */
+  uint16    DAC2;	           /* 48018   LTC2630 */
+  uint16    PD1di;           /* 48019   16bit integer   r/w */
+  uint16    PD2di;           /* 48020   16bit integer   r/w */
+  uint16    PD3di;           /* 48021   16bit integer   r/w */
+  uint16    pdEnddi;         /* 48022   16bit integer   r/w */
+  uint16    PD1;             /* 48023   16bit integer   r/w */
+  uint16    PD2;             /* 48024   16bit integer   r/w */
+  uint16    PD3;             /* 48025   16bit integer   r/w */
+  uint16    pdEnd;           /* 48026   16bit integer   r/w */
+  uint16    ctLED1Factory;   /* 48027   16bit integer   r/w */
+  uint16    ctLED2Factory;   /* 48028   16bit integer   r/w */
+  uint16    PD1diFactory;    /* 48029   16bit integer   r/w */
+  uint16    PD2diFactory;    /* 48030   16bit integer   r/w */
+  uint16    PD3diFactory;    /* 48031   16bit integer   r/w */
+  uint16    pdEnddiFactory;  /* 48032   16bit integer   r/w */ 
+  uint16    errorCode;	     /* 48033   16bit integer   useless r/w */
+  uint16    reserved[4];     /* 48034 reserved */
 } SENSOR_PARAM_T;
 
 #pragma pack()

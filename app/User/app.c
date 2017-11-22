@@ -33,6 +33,7 @@ void System_Init(void)
 	AD5663_GpioInit();
 	LTC2630ISC6_Init();
 	AD7792_Init();	
+	TIM3_Init();
 }
 
 void Parameters_Reset(void)
@@ -57,7 +58,7 @@ void Parameters_Reset(void)
 	comm_settings.modbusParity=MODBUS_PARITY_EVEN;
 	comm_settings.modbusBaud=9600;
 	
-	measure_settings.sampleCycle=4;
+	measure_settings.sampleCycle=3;
 	measure_settings.measureRange=10;
 	measure_settings.smoothingFactor=1.0;
 	measure_settings.command=0;
@@ -66,9 +67,9 @@ void Parameters_Reset(void)
 	calib_settings.calibSolution=5;
 	calib_settings.calibCommand=0;
 	
-	filter_settings.filterType=0;
-	filter_settings.filterCoefficient_1=0.0;
-	filter_settings.filterCoefficient_2=0.0;
+//	filter_settings.filterType=0;
+//	filter_settings.filterCoefficient_1=0.0;
+//	filter_settings.filterCoefficient_2=0.0;
 	
 	sensor_param.slope=1.0;
 	sensor_param.intercept=0.0;
@@ -76,11 +77,12 @@ void Parameters_Reset(void)
 	sensor_param.t2=1.0;
 	sensor_param.mARange1=0.0;
 	sensor_param.mARange2=10.0;
-	sensor_param.reserved2=0;
+	sensor_param.dark=0;
 	sensor_param.ledDelayTime=15;
 	sensor_param.cLED1=100;
 	sensor_param.cLED2=0;
 	sensor_param.VGA1=1;
+	sensor_param.DAC2=0;
 	
 	StoreModbusReg();	
 }
@@ -115,3 +117,52 @@ void LED_TurnOff(void)
 	GPIO_ResetBits(GPIOB,GPIO_Pin_10);
 }
 
+void TIM3_Init(void)
+{
+  TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+  NVIC_InitTypeDef NVIC_InitStructure;
+ 
+  uint16_t PrescalerValue = 0;
+  
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+  
+  //定时器时间基配置说明
+  //HCLK为72MHz，APB1经过2分频为36MHz
+  //TIM3的时钟倍频后为72MHz（硬件自动倍频,达到最大）
+  //TIM3的分频系数为3599，时间基频率为72 / (1 + Prescaler) = 10KHz,基准为0.1ms
+  //TIM最大计数值为usTim1Timerout50u
+  PrescalerValue = (uint16_t) (SystemCoreClock / 10000) - 1; 
+  
+  TIM_TimeBaseStructure.TIM_Period =9999;     //    39999,timing cycle = 4S;改为1秒进一次中断，从而测量周期可调
+  TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;  
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+  TIM_ARRPreloadConfig(TIM3, ENABLE);
+  
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+  NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;  
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+ 
+	TIM_ClearITPendingBit(TIM3,TIM_IT_Update); 
+	TIM_ITConfig(TIM3, TIM_IT_Update,ENABLE);
+
+  TIM_Cmd(TIM3,ENABLE);
+}
+
+u8 isMeasureFlg=0;
+u8 measCount=0;
+
+void TIM3_IRQHandler(void)
+{  
+  TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
+	//if(++measCount>=measure_settings.sampleCycle)
+	if(++measCount>=5)
+	{
+		isMeasureFlg=1;
+		measCount=0;
+	} 
+}

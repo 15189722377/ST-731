@@ -30,5 +30,6 @@ void System_Init(void);
 void Parameters_Reset(void);
 void LED_TurnOn(void);
 void LED_TurnOff(void);
+void TIM3_Init(void);
 
 #endif

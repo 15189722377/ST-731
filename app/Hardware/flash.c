@@ -193,7 +193,7 @@ void RestoreModbusReg(void)
 		StoreModbusReg();
 	} 
 	//以防探头运行时被误存入flash，以下参数每次上电应复位
-	
+	calib_settings.calibCommand=0;
 }
 
 /******************* (C) COPYRIGHT 2015 AndyChen *******END OF FILE*************/

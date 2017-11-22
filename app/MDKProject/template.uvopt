@@ -176,27 +176,37 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>sensor_param</ItemText>
+          <ItemText>system_status</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>system_status</ItemText>
+          <ItemText>comm_settings</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>comm_settings</ItemText>
+          <ItemText>sensor_param</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>sensor_param</ItemText>
+          <ItemText>DataRead</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>DataRead</ItemText>
+          <ItemText>calib_settings</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>isMeasureFlg</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>ucRTUBuf</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -889,7 +899,7 @@
       <GroupNumber>7</GroupNumber>
       <FileNumber>47</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>

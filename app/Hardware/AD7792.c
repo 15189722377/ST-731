@@ -186,7 +186,7 @@ void ReadFromReg(unsigned char nByte) // nByte is the number of bytes which need
 }
 
 PDChannal PD_Channal;
-void AD_GetPD(PDChannal PD_Channal)
+u16 AD_GetPD(PDChannal PD_Channal)
 {
 	u8 count;
 	u32 temp;
@@ -231,7 +231,7 @@ void AD_GetPD(PDChannal PD_Channal)
 //	delay_ms(40);
 	
 	/* start to read from ADC register*/
-	for (count=0; count<10; count++)
+	for (count=0; count<40; count++)
 	{
 		temp = 0;
 
@@ -254,7 +254,9 @@ void AD_GetPD(PDChannal PD_Channal)
 		temp=DataRead[0];
 		temp<<=8;
 		temp+=DataRead[1];
-            
+     
+    filter_settings.ad7792[count]=temp;
+		
 		if (temp > tempMax)
 			tempMax = temp;
 		if (temp < tempMin)
@@ -264,17 +266,19 @@ void AD_GetPD(PDChannal PD_Channal)
 	}
 
 	tempAverage -= (tempMax+tempMin);
-	tempAverage /= 8;
+	tempAverage /= 38;
 	temp = (u16)tempAverage;
 	
+	return temp;
+	
 	/* save PD value in modbus register*/
-	switch (PD_Channal)
-	{
-		case PD_measure:
-		{
-			sensor_param.pdEnd=temp;
-			break;
-		}
+//	switch (PD_Channal)
+//	{
+//		case PD_measure:
+//		{
+//			sensor_param.pdEnd=temp;
+//			break;
+//		}
 //		case PD_main:
 //		{
 //			sensor_param.PD1=temp;		
@@ -285,11 +289,11 @@ void AD_GetPD(PDChannal PD_Channal)
 //			sensor_param.PD2=temp;
 //			break;
 //		}
-		case PD_ref:
-		{
-			sensor_param.PD3=temp;		
-			break;
-		}
-		default: break;
-	}	
+//		case PD_ref:
+//		{
+//			sensor_param.PD3=temp;		
+//			break;
+//		}
+//		default: break;
+//	}	
 }
