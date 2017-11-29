@@ -81,7 +81,8 @@ void Parameters_Reset(void)
 	sensor_param.ledDelayTime=15;
 	sensor_param.cLED1=100;
 	sensor_param.cLED2=0;
-	sensor_param.VGA1=1;
+	sensor_param.VGA1=0;
+	sensor_param.VGA2=0;
 	sensor_param.DAC2=0;
 	
 	StoreModbusReg();	
@@ -165,4 +166,18 @@ void TIM3_IRQHandler(void)
 		isMeasureFlg=1;
 		measCount=0;
 	} 
+}
+
+void FunctionPoll(void)
+{
+	if(bitmodbus==1)
+	{
+		bitmodbus=0;
+		StoreModbusReg();
+	}	
+	
+//	switch(calib_settings.calibCommand)
+//	{
+//		case 
+//	}
 }

@@ -12,6 +12,10 @@
 #define MODBUS_PARITY_ODD 	1
 #define MODBUS_PARITY_EVEN 	2
 
+#define CMD_NONE     0
+#define CMD_STORE_MODBUSREG 		1
+#define CMD_ENTER_BOOT     2
+
 extern SYS_STATUS_T system_status;
 
 extern COMM_SETTINGS_T comm_settings;
@@ -31,5 +35,6 @@ void Parameters_Reset(void);
 void LED_TurnOn(void);
 void LED_TurnOff(void);
 void TIM3_Init(void);
+void FunctionPoll(void);
 
 #endif

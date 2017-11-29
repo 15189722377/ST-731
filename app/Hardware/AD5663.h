@@ -36,6 +36,6 @@
 #define  dacB  0X19   //write to and update dac channel B
 
 void AD5663_GpioInit(void);
-void AD5663_Vout(u16 dacChannel,float Vout);
+void AD5663_Vout(u8 dacChannel,float Vout);
 
 #endif

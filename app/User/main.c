@@ -19,7 +19,7 @@ void Measure(void)
 	delay_ms(200);
 	sensor_param.pdEnd=AD_GetPD(PD_measure);
 	
-	//LED_TurnOff();
+	LED_TurnOff();
 }
 
 int main(void)
@@ -31,41 +31,20 @@ int main(void)
 	
 	System_Init();
 	
-//	RestoreModbusReg();
-Parameters_Reset();
+	RestoreModbusReg();
+
 	eMBInit(MB_RTU, comm_settings.modbusAddr, 0x02, comm_settings.modbusBaud, comm_settings.modbusParity); 
 	eMBEnable();
 	
 	while(1)
 	{		
 		eMBPoll();	
+		FunctionPoll();
 		
-//		write_to_LTC2630_1(0X30,sensor_param.DAC2); 
-//	  delay_ms(10);
-//	  sensor_param.pdEnd=AD_GetPD(PD_measure);
-		
-//		if(bitmodbus==1)
-//		{
-//			StoreModbusReg();
-//		}	
-//		
-//		if(calib_settings.calibCommand==2)
-//		{
-//			calib_settings.calibCommand=0;
-//			StoreModbusReg();  //此处必须保存寄存器，否则CMD得不到真正复位，探头不断进入Boot模式
-//			delay_ms(1500);
-//			__disable_irq();
-//			NVIC_SystemReset();			
-//		}
-//		else if(calib_settings.calibCommand==3)
-//		{
-//			calib_settings.calibCommand=0;
-//			Parameters_Reset();
-//		}
-//		LED_TurnOn();
-//		delay_ms(1);
-//		LED_TurnOff();
-//		delay_ms(1);
+//		AD5663_dacData_Out(dacA,sensor_param.VGA1);
+//		AD5663_dacData_Out(dacB,sensor_param.VGA2);
+//		delay_us(10);
+
 		if(isMeasureFlg==1)
 		{
 			isMeasureFlg=0;
